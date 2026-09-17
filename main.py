@@ -29,8 +29,10 @@ def download_youtube(video_url, mode="1", output_path="."):
         ydl_opts["format"] = "bestvideo+bestaudio/best"
         ydl_opts["merge_output_format"] = "mp4"
     elif mode == "2":
-        print("🎬 Выбрано: Строго 720p (MP4)")
-        ydl_opts["format"] = "bestvideo[height=720]+bestaudio/best"
+        print("🎬 Выбрано: Качество до 720p (MP4)")
+        # Ищет раздельное видео до 720p + лучшее аудио. 
+        # Если такого нет, берет лучшее цельное видео/аудио до 720p.
+        ydl_opts["format"] = "bestvideo[height<=720]+bestaudio/best[height<=720]"
         ydl_opts["merge_output_format"] = "mp4"
     elif mode == "3":
         print("🎵 Выбрано: Только аудио (MP3)")
